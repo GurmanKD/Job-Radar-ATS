@@ -1,0 +1,26 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h1>Job Radar ATS</h1>
+<p class="lead">Your personal job radar + application tracker.</p>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Jobs</h5>
+        <p class="card-text">{{ jobs_count }} jobs stored.</p>
+        <a href="/jobs/" class="btn btn-sm btn-primary">View jobs</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Applications</h5>
+        <p class="card-text">{{ apps_count }} applications tracked.</p>
+        <a href="/applications/" class="btn btn-sm btn-primary">View applications</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

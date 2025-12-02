@@ -1,0 +1,42 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h1 class="mb-3">Jobs</h1>
+
+<p>
+  <a class="btn btn-sm btn-outline-secondary" href="/">Dashboard</a>
+</p>
+
+<table class="table table-striped table-sm align-middle">
+  <thead>
+    <tr>
+      <th>Company</th>
+      <th>Title</th>
+      <th>Location</th>
+      <th>Type</th>
+      <th>Source</th>
+      <th>Apply</th>
+      <th>Track</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for job in jobs %}
+    <tr>
+      <td>{{ job.company }}</td>
+      <td>{{ job.title }}</td>
+      <td>{{ job.location }}</td>
+      <td>{{ job.employment_type }}</td>
+      <td>{{ job.source }}</td>
+      <td><a href="{{ job.apply_url }}" target="_blank">Apply</a></td>
+      <td>
+        <a href="/applications/add?job_id={{ job.id }}" class="btn btn-sm btn-primary">
+          Track
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% if jobs|length == 0 %}
+<p>No jobs yet. Run <code>python scripts/run_ingest.py</code> to ingest.</p>
+{% endif %}
+{% endblock %}

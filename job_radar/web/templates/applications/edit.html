@@ -1,0 +1,54 @@
+{% extends "layout/base.html" %}
+{% block content %}
+<h1>Edit Application</h1>
+
+<p>
+  <strong>{{ app.company }}</strong> – {{ app.role_title }}<br>
+  <a href="{{ app.apply_url }}" target="_blank">View job / application link</a>
+</p>
+
+<form method="post" class="row g-3">
+  <div class="col-md-4">
+    <label class="form-label">Status</label>
+    <select name="status" class="form-select">
+      {% for st in ["planned","applied","oa","interview","offer","rejected","ghosted"] %}
+      <option value="{{ st }}" {% if app.status == st %}selected{% endif %}>{{ st }}</option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <div class="col-md-2">
+    <label class="form-label">Priority (1-5)</label>
+    <input type="number" min="1" max="5" name="priority" value="{{ app.priority }}" class="form-control">
+  </div>
+
+  <div class="col-md-4">
+    <label class="form-label">Next action date (YYYY-MM-DD or full ISO)</label>
+    <input type="text" name="next_action_date" value="{{ app.next_action_date or '' }}" class="form-control">
+  </div>
+
+  <div class="col-12">
+    <label class="form-label">Notes</label>
+    <textarea name="notes" rows="4" class="form-control">{{ app.notes }}</textarea>
+  </div>
+
+  <div class="col-12">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <a href="{{ url_for('applications.list_applications') }}" class="btn btn-secondary">Back</a>
+  </div>
+</form>
+
+<hr>
+
+<h3>Events</h3>
+<ul>
+  {% for ev in app.events|sort(attribute='event_time', reverse=True) %}
+  <li>
+    <strong>{{ ev.event_type }}</strong> – {{ ev.event_time }}<br>
+    {{ ev.description }}
+  </li>
+  {% else %}
+  <li>No events yet.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

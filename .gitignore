@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+.venv/
+venv/
+.env.local
+instance/
+
+# SQLite DB
+*.db
+*.sqlite3
+
+# Gmail / Google API creds
+credentials.json
+token.json
+
+# IDE
+.vscode/
+.idea/
